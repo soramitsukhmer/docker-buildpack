@@ -6,6 +6,9 @@ build() {
 	local DOCKER_META_VERSION=${DOCKER_META_VERSION}
 
 	case "${DOCKER_META_VERSION}" in
+		pr-*)
+			NODE_ENV=development
+		;;
 		develop)
 			NODE_ENV=development
 		;;
@@ -17,8 +20,11 @@ build() {
 		;;
 	esac
 
+	echo "Docker Metadata:"
 	echo "- DOCKER_META_IMAGES=${DOCKER_META_IMAGES}"
 	echo "- DOCKER_META_VERSION=${DOCKER_META_VERSION}"
+	echo
+
 	yarn run build --mode ${NODE_ENV}
 }
 
