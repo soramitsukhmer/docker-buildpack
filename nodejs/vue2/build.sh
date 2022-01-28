@@ -6,7 +6,7 @@ build() {
 	local DOCKER_META_VERSION=${DOCKER_META_VERSION}
 
 	case "${DOCKER_META_VERSION}" in
-		pr-*|v*-alpha.*|v*-beta.*)
+		pr-*|*-alpha.*|*-beta.*)
 			NODE_ENV=development
 		;;
 		develop)
