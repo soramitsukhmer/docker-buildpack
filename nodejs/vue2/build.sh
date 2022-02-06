@@ -9,7 +9,7 @@ build() {
 		pr-*|*-alpha.*|*-beta.*)
 			NODE_ENV=development
 		;;
-		develop)
+		develop|edge)
 			NODE_ENV=development
 		;;
 		main|master)
