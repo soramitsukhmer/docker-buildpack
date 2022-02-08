@@ -49,6 +49,9 @@ build() {
 	echo "- DOCKER_META_IMAGES=${DOCKER_META_IMAGES}"
 	echo "- DOCKER_META_VERSION=${DOCKER_META_VERSION}"
 	echo
+	echo "Vue:"
+	echo "- BUILD_MODE=${BUILD_MODE}"
+	echo
 
 	yarn run build --mode ${BUILD_MODE}
 }
