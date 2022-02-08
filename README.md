@@ -10,9 +10,6 @@
 #
 FROM --platform=$BUILDPLATFORM node:16-alpine AS build-dep
 
-ENV CI=1
-ENV CYPRESS_INSTALL_BINARY=0
-
 COPY .config/bootstrap.sh /bootstrap.sh
 RUN sh /bootstrap.sh
 
@@ -29,6 +26,9 @@ ENV DOCKER_META_VERSION=${DOCKER_META_VERSION}
 WORKDIR /usr/src/app
 
 # Dependencies layer
+ENV CI=1
+ENV CYPRESS_INSTALL_BINARY=0
+
 COPY .npmrc .yarnrc ./
 COPY package.json yarn.lock ./
 RUN yarn install
