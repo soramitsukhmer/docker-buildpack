@@ -39,21 +39,8 @@ COPY .eslintrc.js .eslintignore ./
 COPY babel.config.js vue.config.js ./
 COPY src ./src
 COPY public ./public
-COPY submodules ./submodules
 
 # Build application
 ADD https://raw.githubusercontent.com/soramitsukhmer/docker-entrypoints/main/nodejs/vue2/buildpack /buildpack
 RUN sh /buildpack
-
-# Stage 3 - Final stage
-#
-FROM --platform=$BUILDPLATFORM ghcr.io/soramitsukhmer/nginx-fe:1.21
-
-ARG DOCKER_META_IMAGES=
-ARG DOCKER_META_VERSION
-LABEL version="$DOCKER_META_VERSION"
-
-# # Copy the application from builder stage
-COPY --from=builder /usr/src/app/dist /var/www/public
-
 ```
