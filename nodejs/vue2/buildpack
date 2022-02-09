@@ -53,11 +53,11 @@ build() {
 	echo "- BUILD_MODE=${BUILD_MODE}"
 	echo
 
-	yarn run build --mode ${BUILD_MODE}
+	yarn run build --mode ${BUILD_MODE} "$@"
 }
 
 # RUN
 # - pre_build
 # - build
 # - post_build (always)
-pre_build && (build || post_build) && post_build
+pre_build && (build "$@" || post_build) && post_build
