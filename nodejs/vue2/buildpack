@@ -11,23 +11,35 @@ set -e
 # ENV DOCKER_META_IMAGES=${DOCKER_META_IMAGES}
 # ENV DOCKER_META_VERSION=${DOCKER_META_VERSION}
 
+DOCKER_META_IMAGES=${DOCKER_META_IMAGES}
+DOCKER_META_VERSION=${DOCKER_META_VERSION}
+
+if [[ -z "${DOCKER_META_IMAGES}" || -z "${DOCKER_META_VERSION}" ]]; then
+	echo "Error: Required docker/metadata-action"
+	echo "   GitHub Action to extract metadata (tags, labels) from Git reference and GitHub events for Docker"
+	echo "   See https://github.com/docker/metadata-action"
+	echo
+
+	exit 1
+fi
+
 pre_build() {
 	echo "=> Executing pre-build script"
 	# echo "- Installing https://github.com/google/zx"
+	echo
 	# npm install -g zx
 }
 
 post_build() {
 	echo "=> Executing post-build script"
 	# echo "- Uninstall https://github.com/google/zx"
+	echo
 	# npm uninstall -g zx
 }
 
 build() {
-	local DOCKER_META_IMAGES=${DOCKER_META_IMAGES}
-	local DOCKER_META_VERSION=${DOCKER_META_VERSION}
-
 	local BUILD_MODE=production
+
 	case "${DOCKER_META_VERSION}" in
 		pr-*) # Pull request
 			BUILD_MODE=development
