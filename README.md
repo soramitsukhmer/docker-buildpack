@@ -6,7 +6,18 @@
 **Vue.js version 2 project**
 
 ```Dockerfile
-FROM --platform=$BUILDPLATFORM node:16-alpine AS build-dep
+FROM --platform=$BUILDPLATFORM node:16-alpine
+
+# Automatic platform ARGs
+# This feature is only available when using the BuildKit backend.
+ARG TARGETPLATFORM
+ARG TARGETOS
+ARG TARGETARCH
+ARG TARGETVARIANT
+ARG BUILDPLATFORM
+ARG BUILDOS
+ARG BUILDARCH
+ARG BUILDVARIANT
 
 # Docker Metadata Actions
 ARG DOCKER_META_IMAGES=
