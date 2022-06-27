@@ -36,12 +36,11 @@ COPY package.json yarn.lock ./
 RUN yarn install
 
 # Transfer project source to Docker context
-COPY public ./public
-COPY src ./src
-COPY submodules ./submodules
 COPY .browserslistrc ./
 COPY .eslintrc.js .eslintignore ./
 COPY babel.config.js vue.config.js ./
+COPY public ./public
+COPY src ./src
 
 # Transfer environment files
 COPY .env .env.* ./
