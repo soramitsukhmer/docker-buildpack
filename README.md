@@ -1,4 +1,4 @@
-# docker-entrypoints
+# soramitsukhmer/docker-buildpack
 [Experimental] Docker Global Entrypoint Scripts
 
 ## Usage
