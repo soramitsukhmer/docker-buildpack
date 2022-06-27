@@ -13,14 +13,14 @@ set -e
 
 pre_build() {
 	echo "=> Executing pre-build script"
-	echo "- Installing https://github.com/google/zx"
-	npm install -g zx
+	# echo "- Installing https://github.com/google/zx"
+	# npm install -g zx
 }
 
 post_build() {
 	echo "=> Executing post-build script"
-	echo "- Uninstall https://github.com/google/zx"
-	npm uninstall -g zx
+	# echo "- Uninstall https://github.com/google/zx"
+	# npm uninstall -g zx
 }
 
 build() {
