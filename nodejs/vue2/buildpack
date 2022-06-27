@@ -27,6 +27,7 @@ build() {
 	local DOCKER_META_IMAGES=${DOCKER_META_IMAGES}
 	local DOCKER_META_VERSION=${DOCKER_META_VERSION}
 
+	local BUILD_MODE=production
 	case "${DOCKER_META_VERSION}" in
 		pr-*) # Pull request
 			BUILD_MODE=development
@@ -45,12 +46,9 @@ build() {
 		;;
 	esac
 
-	echo "Docker Metadata:"
-	echo "- DOCKER_META_IMAGES=${DOCKER_META_IMAGES}"
-	echo "- DOCKER_META_VERSION=${DOCKER_META_VERSION}"
-	echo
-	echo "Vue:"
-	echo "- BUILD_MODE=${BUILD_MODE}"
+	echo "Building Vue.js v2 application using ${BUILD_MODE} environment"
+	echo "-  DOCKER_META_IMAGES=${DOCKER_META_IMAGES}"
+	echo "-  DOCKER_META_VERSION=${DOCKER_META_VERSION}"
 	echo
 
 	yarn run build --mode ${BUILD_MODE} "$@"
