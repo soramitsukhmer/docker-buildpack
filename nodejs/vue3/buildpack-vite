@@ -58,7 +58,7 @@ build() {
 		;;
 	esac
 
-	echo "Buildpack: Building Vue.js v2 application for ${BUILD_MODE}..."
+	echo "Buildpack: Building Vue.js application with Vite for ${BUILD_MODE}..."
 	echo "-  DOCKER_META_IMAGES=${DOCKER_META_IMAGES}"
 	echo "-  DOCKER_META_VERSION=${DOCKER_META_VERSION}"
 	echo
