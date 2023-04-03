@@ -1,0 +1,73 @@
+#!/bin/sh
+set -e
+
+# Build Vue.js project with Docker Buildx Bake
+#
+# Docker Metadata Actions
+# Plase this in you Dockerfile
+#
+# ARG DOCKER_META_IMAGES=
+# ARG DOCKER_META_VERSION=
+# ENV DOCKER_META_IMAGES=${DOCKER_META_IMAGES}
+# ENV DOCKER_META_VERSION=${DOCKER_META_VERSION}
+
+DOCKER_META_IMAGES=${DOCKER_META_IMAGES}
+DOCKER_META_VERSION=${DOCKER_META_VERSION}
+
+if [[ -z "${DOCKER_META_IMAGES}" || -z "${DOCKER_META_VERSION}" ]]; then
+	echo "Error: Required docker/metadata-action"
+	echo "   GitHub Action to extract metadata (tags, labels) from Git reference and GitHub events for Docker"
+	echo "   See https://github.com/docker/metadata-action"
+	echo
+
+	exit 1
+fi
+
+pre_build() {
+	echo "=> Executing pre-build script"
+	# echo "- Installing https://github.com/google/zx"
+	echo
+	# npm install -g zx
+}
+
+post_build() {
+	echo "=> Executing post-build script"
+	# echo "- Uninstall https://github.com/google/zx"
+	echo
+	# npm uninstall -g zx
+}
+
+build() {
+	local BUILD_MODE=production
+
+	case "${DOCKER_META_VERSION}" in
+		pr-*) # Pull request
+			BUILD_MODE=development
+		;;
+		develop|edge) # develop/edge branch
+			BUILD_MODE=development
+		;;
+		main|master) # main/master branch
+			BUILD_MODE=production
+		;;
+		*-alpha.*|*-beta.*) # alpha/beta release
+			BUILD_MODE=development
+		;;
+		*) # Default/Production release
+			BUILD_MODE=production
+		;;
+	esac
+
+	echo "Buildpack: Building Vue.js v2 application for ${BUILD_MODE}..."
+	echo "-  DOCKER_META_IMAGES=${DOCKER_META_IMAGES}"
+	echo "-  DOCKER_META_VERSION=${DOCKER_META_VERSION}"
+	echo
+
+	yarn build-only --mode ${BUILD_MODE} "$@"
+}
+
+# RUN
+# - pre_build
+# - build
+# - post_build (always)
+pre_build && (build "$@" || post_build) && post_build
