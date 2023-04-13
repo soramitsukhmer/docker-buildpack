@@ -63,7 +63,7 @@ build() {
 	echo "-  DOCKER_META_VERSION=${DOCKER_META_VERSION}"
 	echo
 
-	yarn build-only --mode ${BUILD_MODE} "$@"
+	yarn build-only --logLevel info --mode ${BUILD_MODE} "$@"
 }
 
 # RUN
